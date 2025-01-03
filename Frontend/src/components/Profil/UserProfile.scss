@@ -1,0 +1,21 @@
+/* Profile container sous le header et à droite de la sidebar */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f0f0f0; /* Exemple de couleur de fond pour le profil */
+}
+
+.profile-container h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.profile-container p {
+  font-weight: 400;
+  margin-top: 10px;
+}

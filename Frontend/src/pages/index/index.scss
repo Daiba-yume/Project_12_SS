@@ -1,0 +1,15 @@
+.main-content {
+  display: flex;
+  align-items: flex-start;
+  margin-left: 120px;
+  flex: 1;
+  padding: 20px;
+  gap: 20px;
+
+  .left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

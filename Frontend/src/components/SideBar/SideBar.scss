@@ -1,0 +1,31 @@
+.sideBarContainer {
+  position: fixed;
+  top: 60px;
+  width: 100px;
+  height: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 20px;
+  z-index: 500;
+
+  .imgSideBar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    object-fit: contain;
+  }
+
+  .footer {
+    p {
+      font-size: 12px;
+      color: white;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align: center;
+    }
+  }
+}

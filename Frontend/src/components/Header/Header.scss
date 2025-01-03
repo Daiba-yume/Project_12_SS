@@ -1,0 +1,29 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  height: 80px;
+  width: 100%;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  img {
+    height: 50px;
+    width: auto;
+    padding-left: 20px;
+  }
+
+  .navContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20%;
+    gap: 180px;
+
+    a {
+      font-size: 20px;
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
