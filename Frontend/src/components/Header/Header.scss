@@ -16,14 +16,21 @@ header {
   .navContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding: 20%;
+    justify-content: center;
+    flex-grow: 1;
     gap: 180px;
 
     a {
       font-size: 20px;
       text-decoration: none;
       color: white;
+    }
+  }
+
+  // Pour les écrans à partir de 1024px
+  @media (max-width: 1024px) and (max-height: 780px) {
+    .navContainer {
+      gap: 150px;
     }
   }
 }
