@@ -15,9 +15,11 @@ function Index() {
         <div className="left-content">
           <UserProfile />
           <ActivityChart />
-          <WaveChart />
-          <RadarChart />
-          <ScoreChart />
+          <div className="row-chart">
+            <WaveChart />
+            <RadarChart />
+            <ScoreChart />
+          </div>
         </div>
         <NutritionBloc />
       </div>
