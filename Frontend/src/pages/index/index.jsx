@@ -1,6 +1,6 @@
 import ActivityChart from "../../components/ActivityChart/ActivityChart";
 import WaveChart from "../../components/WaveChart/WaveChart";
-import RadarChart from "../../components/RadarChart/RadarChart";
+import ChartRadar from "../../components/RadarChart/ChartRadar";
 import ScoreChart from "../../components/ScoreChart/ScoreChart";
 import SideBar from "../../components/SideBar/SideBar";
 import UserProfile from "../../components/Profil/UserProfile";
@@ -17,7 +17,7 @@ function Index() {
           <ActivityChart />
           <div className="row-chart">
             <WaveChart />
-            <RadarChart />
+            <ChartRadar />
             <ScoreChart />
           </div>
         </div>
