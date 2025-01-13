@@ -12,9 +12,9 @@ function NutritionBloc() {
     { icon: lipidesIcon, label: "Lipides", value: "50g" },
   ];
   return (
-    <div className="nutrition-bloc">
+    <div className="nutriBloc">
       {nutritionData.map((item, index) => (
-        <div key={index} className="nutrition-info">
+        <div key={index} className="nutriInfo">
           <div className="icon">
             <img src={item.icon} alt={item.label} />
           </div>

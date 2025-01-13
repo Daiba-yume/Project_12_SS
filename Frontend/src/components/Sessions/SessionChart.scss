@@ -1,12 +1,14 @@
-.wave-container {
+.sessionContainer {
   display: flex;
   flex-direction: row;
   width: 30%;
   margin-top: 20px;
   padding: 10px;
-  background-color: #f0f0f0;
+  background-color: #ff0000;
   border-radius: 5px;
-  h1 {
+  .sessionTitle {
     font-size: 15px;
+    color: #ffffff;
+    opacity: 0.5;
   }
 }

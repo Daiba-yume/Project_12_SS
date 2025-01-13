@@ -1,11 +1,11 @@
-import ActivityChart from "../../components/ActivityChart/ActivityChart";
-import WaveChart from "../../components/WaveChart/WaveChart";
-import ChartRadar from "../../components/RadarChart/ChartRadar";
-import ScoreChart from "../../components/ScoreChart/ScoreChart";
+import ActivityChart from "../../components/Activity/ActivityChart";
+import SessionChart from "../../components/Sessions/SessionChart";
+import Performance from "../../components/Performances/Performance";
+import ScoreChart from "../../components/Score/ScoreChart";
 import SideBar from "../../components/SideBar/SideBar";
 import UserProfile from "../../components/Profil/UserProfile";
 import "./index.scss";
-import NutritionBloc from "../../components/NutritionBloc/NutritionBloc";
+import NutritionBloc from "../../components/Nutrition/NutritionBloc";
 
 function Index() {
   return (
@@ -16,8 +16,8 @@ function Index() {
           <UserProfile />
           <ActivityChart />
           <div className="row-chart">
-            <WaveChart />
-            <ChartRadar />
+            <SessionChart />
+            <Performance />
             <ScoreChart />
           </div>
         </div>
