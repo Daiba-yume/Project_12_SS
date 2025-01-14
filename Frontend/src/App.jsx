@@ -26,6 +26,8 @@ function App() {
       <GlobalStyle />
       <Header />
       <Routes>
+        {/* Route pour la page d'accueil */}
+        <Route path="/" element={<Index />} />
         <Route path="/user/:id" element={<Index />} />
       </Routes>
     </BrowserRouter>

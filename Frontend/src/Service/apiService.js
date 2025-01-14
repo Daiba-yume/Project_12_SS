@@ -13,60 +13,76 @@ import {
 
 //Config centralisée
 const api = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "http://localhost:3000/user/",
   timeout: 5000, // 5 sec de délais max (évite le blocage de la req, ex: soucis de rés ou serveur)
 });
 
 // Fonction pour récupérer les données des users avec l'ID (API et mocked)
 export const getUserData = async (userId) => {
+  if (!userId || typeof userId !== "number") {
+    console.log("User ID is missing");
+    return;
+  }
   try {
     //Envoie de la requête GET pour récupérer les données user
-    const response = await api.get(`/user/${userId}`);
+    const response = await api.get(`/${userId}`);
     const userData = response.data; // données user récup via l'API
-
-    // Data formatées si l'API est accessible
-    const user = formatUserMain(userData);
-    const activity = formatUserActivity(userData);
-    const session = formatUserSession(userData);
-    const performance = formatUserPerformance(userData);
-    const score = formatUserScore(userData);
-
-    //return les données
-    return { ...userData, user, activity, session, performance, score };
+    console.log(userData);
+    // Formatage des données si l'API est accessible
+    return formatData(userData);
   } catch (error) {
     console.log(
       "Erreur lors de la récupération des données utilisateurs :",
-      error
+      error.response ? error.response.data : error.message
     );
-
-    // Utilisation des dataMocked en cas d'échec de l'API
-    const userMockData = USER_MAIN_DATA.find((user) => user.id === userId);
-    const activityMockData = USER_ACTIVITY.find(
-      (activity) => activity.id === userId
-    );
-    const sessionMockData = USER_AVERAGE_SESSIONS.find(
-      (session) => session.id === userId
-    );
-    const performanceMockData = USER_PERFORMANCE.find(
-      (performance) => performance.id === userId
-    );
-
-    // Si aucune dataMocked trouvée, return null
-    if (
-      !userMockData ||
-      !activityMockData ||
-      !sessionMockData ||
-      !performanceMockData
-    ) {
+    // Utilisation des données simulées (mocked) en cas d'échec de l'API
+    const mockData = getMockedData(userId);
+    if (!mockData) {
+      console.log("Aucune donnée simulée trouvée");
       return null;
     }
-    // Return les dataMocked formatées
-    const user = formatUserMain(userMockData);
-    const activity = formatUserActivity(userMockData);
-    const session = formatUserSession(userMockData);
-    const performance = formatUserPerformance(userMockData);
-    const score = formatUserScore(userMockData);
-
-    return { ...userMockData, user, activity, session, performance, score };
+    return formatData(mockData);
   }
+};
+
+// Fonction pour formaté les données
+const formatData = (data) => {
+  const user = formatUserMain(data);
+  const activity = formatUserActivity(data);
+  const session = formatUserSession(data);
+  const performance = formatUserPerformance(data);
+  const score = formatUserScore(data);
+
+  //return les données
+  return { ...data, user, activity, session, performance, score };
+};
+
+// Fonction pour récupérer les données simulées (mocked)
+const getMockedData = (userId) => {
+  const userMockData = USER_MAIN_DATA.find((user) => user.id === userId);
+  const activityMockData = USER_ACTIVITY.find(
+    (activity) => activity.id === userId
+  );
+  const sessionMockData = USER_AVERAGE_SESSIONS.find(
+    (session) => session.id === userId
+  );
+  const performanceMockData = USER_PERFORMANCE.find(
+    (performance) => performance.id === userId
+  );
+
+  //On Vérifie si les données simulées existent pour chaque catégorie
+  if (
+    !userMockData &&
+    !activityMockData &&
+    !sessionMockData &&
+    !performanceMockData
+  ) {
+    return {
+      userMockData,
+      activityMockData,
+      sessionMockData,
+      performanceMockData,
+    };
+  }
+  return null;
 };

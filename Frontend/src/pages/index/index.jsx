@@ -10,20 +10,21 @@ import { useParams } from "react-router-dom";
 
 function Index() {
   const { id } = useParams(); /*  récupérer l'ID depuis l'URL. */
+  console.log("User ID:", id);
   return (
     <>
       <SideBar />
       <div className="main-content">
         <div className="left-content">
-          <UserProfile useParamId={id} />
-          <ActivityChart useParamId={id} />
+          <UserProfile id={id} />
+          <ActivityChart id={id} />
           <div className="row-chart">
-            <SessionChart useParamId={id} />
-            <Performance useParamId={id} />
-            <ScoreChart useParamId={id} />
+            <SessionChart id={id} />
+            <Performance id={id} />
+            <ScoreChart id={id} />
           </div>
         </div>
-        <NutritionBloc useParamId={id} />
+        <NutritionBloc id={id} />
       </div>
     </>
   );
