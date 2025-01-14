@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import { createGlobalStyle } from "styled-components";
 import Index from "./pages/index";
@@ -25,7 +25,9 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Header />
-      <Index />
+      <Routes>
+        <Route path="/user/:id" element={<Index />} />
+      </Routes>
     </BrowserRouter>
   );
 }

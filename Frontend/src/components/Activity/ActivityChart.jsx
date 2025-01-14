@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getUserData } from "../../Service/apiService";
+import { formatUserActivity } from "../../Models/modelActivity";
 import {
   BarChart,
   Bar,
@@ -7,13 +11,26 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
-import { USER_ACTIVITY } from "../../data/data";
 import "./ActivityChart.scss";
 
 const ActivityChart = () => {
-  const userId = 12;
-  // On Récupére les données de l'utilisateur
-  const userActivity = USER_ACTIVITY.find((user) => user.userId === userId);
+  const { id } = useParams(); //  useParams pour récupérer l'ID utilisateur dans l'URL
+  const [userActivity, setUserActivity] = useState(null); // stocke les données d'activité de l'utilisateur
+
+  // récupére les données de l'utilisateur lorsque l'ID change
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUserData(id); // Passez l'ID récupéré à la fonction getUserData
+      const activity = formatUserActivity(data); // formatage des données reçues
+      console.log(activity);
+
+      setUserActivity(activity); // met à jour l'état userActivity avec les dataMocked
+    };
+    // Si l'ID dispo, récupération des data
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
 
   // Vérification des données
   if (!userActivity) {
