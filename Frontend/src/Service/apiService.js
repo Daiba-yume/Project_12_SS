@@ -19,13 +19,9 @@ const api = axios.create({
 
 // Fonction pour récupérer les données des users avec l'ID (API et mocked)
 export const getUserData = async (userId) => {
-  if (!userId || typeof userId !== "number") {
-    console.log("User ID is missing");
-    return;
-  }
   try {
     //Envoie de la requête GET pour récupérer les données user
-    const response = await api.get(`/${userId}`);
+    const response = await api.get(`${userId}`);
     const userData = response.data; // données user récup via l'API
     console.log(userData);
     // Formatage des données si l'API est accessible
