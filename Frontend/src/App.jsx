@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import { createGlobalStyle } from "styled-components";
+import Home from "./components/Home/home";
 import Index from "./pages/index";
 
 const GlobalStyle = createGlobalStyle`
@@ -27,7 +28,8 @@ function App() {
       <Header />
       <Routes>
         {/* Route pour la page d'accueil */}
-        <Route path="/" element={<Index />} />
+        <Route path="/" element={<Home />} />
+        {/* Route dynamique pour l'ID utilisateur */}
         <Route path="/user/:id" element={<Index />} />
       </Routes>
     </BrowserRouter>

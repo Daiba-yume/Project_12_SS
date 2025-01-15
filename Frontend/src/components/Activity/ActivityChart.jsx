@@ -23,7 +23,6 @@ const ActivityChart = () => {
       const data = await getUserData(id); // Passez l'ID récupéré à la fonction getUserData
       const activity = formatUserActivity(data); // formatage des données reçues
       console.log(activity);
-
       setUserActivity(activity); // met à jour l'état userActivity avec les dataMocked
     };
     // Si l'ID dispo, récupération des data
