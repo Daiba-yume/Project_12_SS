@@ -25,7 +25,7 @@ export const getUserData = async (userId) => {
     const userData = response.data; // données user récup via l'API
     console.log(userData);
     // Formatage des données si l'API est accessible
-    return formatData(userData);
+    return formatUserData(userData);
   } catch (error) {
     console.log(
       "Erreur lors de la récupération des données utilisateurs :",
@@ -37,12 +37,12 @@ export const getUserData = async (userId) => {
       console.log("Aucune donnée simulée trouvée");
       return null;
     }
-    return formatData(mockData);
+    return formatUserData(mockData);
   }
 };
 
 // Fonction pour formaté les données
-const formatData = (data) => {
+const formatUserData = (data) => {
   const user = formatUserMain(data);
   const activity = formatUserActivity(data);
   const session = formatUserSession(data);
@@ -57,27 +57,27 @@ const formatData = (data) => {
 const getMockedData = (userId) => {
   const userMockData = USER_MAIN_DATA.find((user) => user.id === userId);
   const activityMockData = USER_ACTIVITY.find(
-    (activity) => activity.id === userId
+    (activity) => activity.userId === userId
   );
   const sessionMockData = USER_AVERAGE_SESSIONS.find(
-    (session) => session.id === userId
+    (session) => session.userId === userId
   );
   const performanceMockData = USER_PERFORMANCE.find(
-    (performance) => performance.id === userId
+    (performance) => performance.userId === userId
   );
 
   //On Vérifie si les données simulées existent pour chaque catégorie
   if (
-    !userMockData &&
-    !activityMockData &&
-    !sessionMockData &&
-    !performanceMockData
+    userMockData &&
+    activityMockData &&
+    sessionMockData &&
+    performanceMockData
   ) {
     return {
-      userMockData,
-      activityMockData,
-      sessionMockData,
-      performanceMockData,
+      user: userMockData,
+      activity: activityMockData,
+      session: sessionMockData,
+      performance: performanceMockData,
     };
   }
   return null;
