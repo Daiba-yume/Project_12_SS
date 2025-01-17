@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import { createGlobalStyle } from "styled-components";
-import Home from "./pages/index/Home";
+import Home from "./pages/Home/Home";
 
 const GlobalStyle = createGlobalStyle`
 *{
