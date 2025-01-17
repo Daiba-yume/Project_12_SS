@@ -4,11 +4,11 @@ import Performance from "../../components/Performances/Performance";
 import ScoreChart from "../../components/Score/ScoreChart";
 import SideBar from "../../components/SideBar/SideBar";
 import UserProfile from "../../components/Profil/UserProfile";
-import "./index.scss";
+import "./Home.scss";
 import NutritionBloc from "../../components/Nutrition/NutritionBloc";
 import { useParams } from "react-router-dom";
 
-function Index() {
+function Home() {
   const { id } = useParams(); /*  récupérer l'ID depuis l'URL. */
   console.log("User ID:", id);
   return (
@@ -30,4 +30,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default Home;

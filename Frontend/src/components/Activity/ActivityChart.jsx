@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getUserData } from "../../Service/apiService";
-import { formatUserActivity } from "../../Models/modelActivity";
+import { getUserActivityData } from "../../Service/apiService";
 import {
   BarChart,
   Bar,
@@ -13,16 +11,14 @@ import {
 } from "recharts";
 import "./ActivityChart.scss";
 
-const ActivityChart = () => {
-  const { id } = useParams(); //  useParams pour récupérer l'ID utilisateur dans l'URL
+// eslint-disable-next-line react/prop-types
+const ActivityChart = ({ id }) => {
   const [userActivity, setUserActivity] = useState(null); // stocke les données d'activité de l'utilisateur
 
   // récupére les données de l'utilisateur lorsque l'ID change
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getUserData(id); // Passez l'ID récupéré à la fonction getUserData
-      const activity = formatUserActivity(data); // formatage des données reçues
-      console.log(activity);
+      const activity = await getUserActivityData(id); // Passez l'ID récupéré à la fonction getUserData
       setUserActivity(activity); // met à jour l'état userActivity avec les dataMocked
     };
     // Si l'ID dispo, récupération des data
@@ -41,7 +37,7 @@ const ActivityChart = () => {
       <h1>Activité quotidienne</h1>
       <ResponsiveContainer width="100%" height={200}>
         <BarChart
-          data={userActivity.sessions} // Passez les sessions comme données
+          data={userActivity} // Passez les sessions comme données
           margin={{ top: 40, right: 10, left: 50, bottom: 5 }}
           barSize={10}
           barGap={8}

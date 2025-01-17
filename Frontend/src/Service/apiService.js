@@ -82,3 +82,40 @@ const getMockedData = (userId) => {
   }
   return null;
 };
+// Fonction pour récupérer les données des usersActivity avec l'ID (API et mocked)
+export const getUserActivityData = async (userId) => {
+  try {
+    //Envoie de la requête GET pour récupérer les données user
+    const response = await api.get(`${userId}/activity`);
+    const userData = response.data; // données user récup via l'API
+    console.log(userData);
+    // Formatage des données si l'API est accessible
+    return formatUserData(userData);
+  } catch (error) {
+    console.log(
+      "Erreur lors de la récupération des données utilisateurs :",
+      error.response ? error.response.data : error.message
+    );
+    // Utilisation des données simulées (mocked) en cas d'échec de l'API
+    const mockData = getActivityMockedData(userId);
+    if (!mockData) {
+      console.log("Aucune donnée simulée trouvée");
+      return null;
+    }
+    return formatUserActivity(mockData);
+  }
+};
+
+const getActivityMockedData = (userId) => {
+  const activityMockData = USER_ACTIVITY.find(
+    (activity) => activity.userId == userId
+  );
+
+  //On Vérifie si les données simulées existent pour chaque catégorie
+  if (activityMockData) {
+    return {
+      sessions: activityMockData.sessions,
+    };
+  }
+  return null;
+};
