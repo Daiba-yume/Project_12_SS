@@ -12,7 +12,7 @@ Ce projet, utilise [React+Vite](https://vitejs.fr/guide/), [Recharts](https://re
 
 - [Backend](https://github.com/OpenClassrooms-Student-Center/SportSee)
 
--[Kanban](https://openclassrooms.notion.site/Tableau-de-bord-SportSee-6686aa4b5f44417881a4884c9af5669e)
+- [Kanban](https://openclassrooms.notion.site/Tableau-de-bord-SportSee-6686aa4b5f44417881a4884c9af5669e)
 
 ### Installation :
 
