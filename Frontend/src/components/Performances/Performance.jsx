@@ -1,4 +1,6 @@
 import "./Performance.scss";
+import { getUserPerformanceData } from "../../Service/apiService";
+import { useEffect, useState } from "react";
 import {
   Radar,
   RadarChart,
@@ -7,23 +9,39 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-function Performance() {
-  const data = [
-    { subject: "Intensité", A: 30, fullMark: 150 },
-    { subject: "Vitesse", A: 98, fullMark: 150 },
-    { subject: "Force", A: 65, fullMark: 150 },
-    { subject: "Endurance", A: 89, fullMark: 150 },
-    { subject: "Energie", A: 85, fullMark: 150 },
-    { subject: "Cardio", A: 45, fullMark: 150 },
-  ];
+// eslint-disable-next-line react/prop-types
+function Performance({ id }) {
+  const [userPerformance, setUserPerformance] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const performance = await getUserPerformanceData(id);
+
+      console.log("Données récupérées :", performance); // Ajout pour debug
+      setUserPerformance(performance);
+    };
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
+  // Vérification des données
+  if (!userPerformance) {
+    return <p>Aucune donnée d`activité trouvée pour cet utilisateur.</p>;
+  }
+
   return (
-    <div className="PerfoContainer">
+    <div className="perfoContainer">
       <ResponsiveContainer width="100%" height={200}>
-        <RadarChart data={data} cx="50%" cy="50%" outerRadius="80%">
+        <RadarChart data={userPerformance} cx="50%" cy="50%" outerRadius="70%">
           {/* Désactivation des lignes radiales */}
           <PolarGrid radialLines={false} />
-          <PolarAngleAxis dataKey="subject" />
-          <Radar name="Mike" dataKey="A" fill="#E60000" fillOpacity={0.8} />
+          <PolarAngleAxis dataKey="kind" />
+          <Radar
+            name="Performance"
+            dataKey="value"
+            fill="#E60000"
+            fillOpacity={0.8}
+          />
         </RadarChart>
       </ResponsiveContainer>
     </div>

@@ -1,3 +1,5 @@
+import { getUserSessionData } from "../../Service/apiService";
+import { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -8,23 +10,29 @@ import {
 } from "recharts";
 import "./SessionChart.scss";
 
-const data = [
-  { day: "L", sessionLength: 30 },
-  { day: "M", sessionLength: 40 },
-  { day: "M", sessionLength: 35 },
-  { day: "J", sessionLength: 50 },
-  { day: "V", sessionLength: 45 },
-  { day: "S", sessionLength: 60 },
-  { day: "D", sessionLength: 55 },
-];
+// eslint-disable-next-line react/prop-types
+function SessionChart({ id }) {
+  const [userSession, setUserSession] = useState(null);
 
-function SessionChart() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const sessions = await getUserSessionData(id);
+      setUserSession(sessions);
+    };
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
+
+  if (!userSession) {
+    return <p>Acune donnée session trouvée pour cet utilisateur</p>;
+  }
   return (
     <div className="sessionContainer">
       <ResponsiveContainer width="100%" height={200}>
         <h1 className="sessionTitle">Durée moyenne des sessions</h1>
         <LineChart
-          data={data}
+          data={userSession}
           margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
         >
           {/* Dégradé linéaire du graphique */}

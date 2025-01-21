@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "./ScoreChart.scss";
 import {
   ResponsiveContainer,
@@ -6,17 +7,18 @@ import {
   PolarAngleAxis,
   Legend,
 } from "recharts";
+import { formatUserScore } from "../../Models/modelScore";
 
-const data = [
-  { name: "Score", value: 18 }, // 12% de l'objectif
-  { name: "Restant", value: 88 }, // Le reste pour atteindre 100%
-];
-
-function ScoreChart() {
+function ScoreChart({ id }) {
+  const score = formatUserScore(id);
+  const data = [
+    { name: "Score", value: score * 100 }, // % de l'objectif
+    { name: "Restant", value: 100 - score * 100 }, // Le reste pour atteindre 100%
+  ];
   const legendScore = () => {
     return (
       <div className="legendScore">
-        <div className="score">{}%</div>
+        <div className="score">{score * 100}%</div>
         <div className="detail">de votre objectif</div>
       </div>
     );

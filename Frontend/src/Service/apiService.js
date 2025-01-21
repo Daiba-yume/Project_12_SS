@@ -85,7 +85,7 @@ const getMockedData = (userId) => {
 // Fonction pour récupérer les données des usersActivity avec l'ID (API et mocked)
 export const getUserActivityData = async (userId) => {
   try {
-    //Envoie de la requête GET pour récupérer les données user
+    //Envoie de la requête GET pour récupérer les données activity
     const response = await api.get(`${userId}/activity`);
     const userData = response.data; // données user récup via l'API
     console.log(userData);
@@ -105,6 +105,8 @@ export const getUserActivityData = async (userId) => {
     return formatUserActivity(mockData);
   }
 };
+// Fonction pour récupérer les données simulées des sessions (mockées)
+// Cherche dans la liste USER_ACTIVITY si l'ID correspond à un utilisateur
 
 const getActivityMockedData = (userId) => {
   const activityMockData = USER_ACTIVITY.find(
@@ -118,4 +120,79 @@ const getActivityMockedData = (userId) => {
     };
   }
   return null;
+};
+
+// Fonction pour récupérer les données des usersSession avec l'ID (API et mocked)
+export const getUserSessionData = async (userId) => {
+  try {
+    //Envoie de la requête GET pour récupérer les données sessions
+    const response = await api.get(`${userId}/average-sessions`);
+    const userData = response.data; // Stocke les données reçues de l'API
+    return formatUserData(userData); // Formate les données et les renvoie
+  } catch (error) {
+    // Si une erreur se produit lors de l'appel à l'API, on affiche un message d'erreur
+
+    console.log("Erreur lors de la réupération des datas users", error.message);
+  }
+  // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
+  const mockData = getSessionMockData(userId);
+  if (!mockData) {
+    console.log("Aucune données simulé trouvé");
+    return null;
+  }
+  // Si des données simulées sont trouvées, sont formaté et renvoyé
+  return formatUserSession(mockData);
+};
+// Fonction pour récupérer les données simulées des sessions (mockées)
+// Cherche dans la liste USER_AVERAGE_SESSIONS si l'ID correspond à un utilisateur
+const getSessionMockData = (userId) => {
+  const sessionMockData = USER_AVERAGE_SESSIONS.find(
+    (session) => session.userId == userId
+  );
+  if (sessionMockData) {
+    // Si des données simulées sont trouvées, sont renvoyer sous un format structuré
+    return {
+      sessions: sessionMockData.sessions,
+    };
+  }
+  return null; // si aucun utilisateur n'est trouvé avec cet ID
+};
+
+// Fonction pour récupérer les données des usersPerformance avec l'ID (API et mocked)
+export const getUserPerformanceData = async (userId) => {
+  try {
+    //Envoie de la requête GET pour récupérer les données performance
+    const response = await api.get(`${userId}/performance`);
+    const userData = response.data; // Stocke les données reçues de l'API
+    return formatUserData(userData); // Formate les données et les renvoie
+  } catch (error) {
+    console.log(
+      "Erreur lors de la récupération des data users ",
+      error.message
+    );
+    // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
+    const mockData = getPerformanceMockData(userId);
+    if (!mockData) {
+      console.log("Aucune donnée simulée trouvée");
+      return null;
+    }
+    return formatUserPerformance(mockData);
+  }
+};
+
+// Fonction pour récupérer les données simulées des performances (mockées)
+// Cherche dans la liste USER_PERFORMANCE si l'ID correspond à un utilisateur
+
+const getPerformanceMockData = (userId) => {
+  const performanceMockData = USER_PERFORMANCE.find(
+    (performance) => performance.userId == userId
+  );
+  if (performanceMockData) {
+    // Si des données simulées sont trouvées, sont renvoyer sous un format structuré
+    return {
+      kind: performanceMockData.kind,
+      data: performanceMockData.data,
+    };
+  }
+  return null; // si aucun utilisateur n'est trouvé avec cet ID
 };
