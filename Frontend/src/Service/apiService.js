@@ -17,7 +17,7 @@ const api = axios.create({
   timeout: 5000, // 5 sec de délais max (évite le blocage de la req, ex: soucis de rés ou serveur)
 });
 
-// Fonction pour récupérer les données des users avec l'ID (API et mocked)
+/* Fonction pour récupérer les données des users avec l'ID (API et mocked) */
 export const getUserData = async (userId) => {
   try {
     //Envoie de la requête GET pour récupérer les données user
@@ -82,7 +82,8 @@ const getMockedData = (userId) => {
   }
   return null;
 };
-// Fonction pour récupérer les données des usersActivity avec l'ID (API et mocked)
+////////////////
+/*  Fonction pour récupérer les données des usersActivity avec l'ID (API et mocked )*/
 export const getUserActivityData = async (userId) => {
   try {
     //Envoie de la requête GET pour récupérer les données activity
@@ -107,7 +108,6 @@ export const getUserActivityData = async (userId) => {
 };
 // Fonction pour récupérer les données simulées des sessions (mockées)
 // Cherche dans la liste USER_ACTIVITY si l'ID correspond à un utilisateur
-
 const getActivityMockedData = (userId) => {
   const activityMockData = USER_ACTIVITY.find(
     (activity) => activity.userId == userId
@@ -121,8 +121,8 @@ const getActivityMockedData = (userId) => {
   }
   return null;
 };
-
-// Fonction pour récupérer les données des usersSession avec l'ID (API et mocked)
+///////////////////////
+/*  Fonction pour récupérer les données des usersSession avec l'ID (API et mocked) */
 export const getUserSessionData = async (userId) => {
   try {
     //Envoie de la requête GET pour récupérer les données sessions
@@ -157,8 +157,8 @@ const getSessionMockData = (userId) => {
   }
   return null; // si aucun utilisateur n'est trouvé avec cet ID
 };
-
-// Fonction pour récupérer les données des usersPerformance avec l'ID (API et mocked)
+///////////////////
+/*  Fonction pour récupérer les données des usersPerformance avec l'ID (API et mocked)*/
 export const getUserPerformanceData = async (userId) => {
   try {
     //Envoie de la requête GET pour récupérer les données performance
@@ -179,10 +179,8 @@ export const getUserPerformanceData = async (userId) => {
     return formatUserPerformance(mockData);
   }
 };
-
 // Fonction pour récupérer les données simulées des performances (mockées)
 // Cherche dans la liste USER_PERFORMANCE si l'ID correspond à un utilisateur
-
 const getPerformanceMockData = (userId) => {
   const performanceMockData = USER_PERFORMANCE.find(
     (performance) => performance.userId == userId
@@ -194,5 +192,43 @@ const getPerformanceMockData = (userId) => {
       data: performanceMockData.data,
     };
   }
+  return null; // si aucun utilisateur n'est trouvé avec cet ID
+};
+///////////////////
+/*  Fonction pour récupérer les données des usersScore avec l'ID (API et mocked) */
+export const getUserScoreData = async (userId) => {
+  try {
+    //Envoie de la requête GET pour récupérer les données performance
+    const response = await api.get(`${userId}`);
+    const userData = response.data; // Stocke les données reçues de l'API
+    return formatUserData(userData); // Formate les données et les renvoie
+  } catch (error) {
+    console.log(
+      "Erreur lors de la récupération des data users ",
+      error.message
+    );
+    // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
+    const mockData = getScoreMockData(userId);
+    if (!mockData) {
+      console.log("Aucune donnée simulée trouvée");
+      return null;
+    }
+    return formatUserScore(mockData);
+  }
+};
+// Fonction pour récupérer les données simulées du score (mockées)
+// Cherche dans la liste USER_MAIN_DATA si l'ID correspond à un utilisateur
+const getScoreMockData = (userId) => {
+  console.log(`Recherche des données pour l'utilisateur avec l'ID : ${userId}`);
+  const scoreMockData = USER_MAIN_DATA.find((score) => score.id == userId);
+  if (scoreMockData) {
+    console.log("Données simulées trouvées :", scoreMockData);
+    // Si des données simulées sont trouvées, sont renvoyer sous un format structuré
+    return {
+      todayScore: scoreMockData.todayScore || 0,
+      score: scoreMockData.score || 0,
+    };
+  }
+  console.log(`Aucune donnée simulée trouvée pour l'ID ${userId}`);
   return null; // si aucun utilisateur n'est trouvé avec cet ID
 };

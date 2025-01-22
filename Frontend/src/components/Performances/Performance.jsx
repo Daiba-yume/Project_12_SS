@@ -26,7 +26,7 @@ function Performance({ id }) {
   }, [id]);
   // Vérification des données
   if (!userPerformance) {
-    return <p>Aucune donnée d`activité trouvée pour cet utilisateur.</p>;
+    return <p>Aucune donnée performance trouvée pour cet utilisateur.</p>;
   }
 
   return (

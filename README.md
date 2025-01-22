@@ -6,7 +6,7 @@ Objectif : Développez un tableau de bord d'analytics avec React
 
 Ce projet, utilise [React+Vite](https://vitejs.fr/guide/), [Recharts](https://recharts.org/en-US/guide) et [SASS](https://sass-lang.com/install/)
 
-## Liens utiles :
+## Liens utiles
 
 - [Maquette figma](https://www.figma.com/design/BMomGVZqLZb811mDMShpLu/UI-design-Sportify-FR?node-id=0-1)
 
@@ -14,7 +14,7 @@ Ce projet, utilise [React+Vite](https://vitejs.fr/guide/), [Recharts](https://re
 
 - [Kanban](https://openclassrooms.notion.site/Tableau-de-bord-SportSee-6686aa4b5f44417881a4884c9af5669e)
 
-### Installation :
+### Installation
 
 - Installer les dépendances dans le fichier Frontend et backend avec la commande `npm install`
 - Ouvrez le terminal, placer vous dans le dossier Frontend (`cd Frontend`) puis lancer la commande `npm run dev`
