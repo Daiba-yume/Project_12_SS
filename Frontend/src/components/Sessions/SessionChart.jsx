@@ -7,8 +7,33 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Rectangle,
 } from "recharts";
 import "./SessionChart.scss";
+import PropTypes from "prop-types";
+
+/* Custom Tooltip */
+const CustomCursor = ({ points }) => {
+  const { x } = points[0]; // Prend la position `x` de la souris
+  return (
+    <Rectangle
+      fill="#000000"
+      x={x}
+      opacity={0.1}
+      y={0}
+      width={500}
+      height={200}
+    />
+  );
+};
+// Validation des props pour CustomCursor
+CustomCursor.propTypes = {
+  points: PropTypes.arrayOf(
+    PropTypes.shape({
+      x: PropTypes.number.isRequired, // Chaque point doit avoir `x` comme nombre
+    }).isRequired
+  ),
+};
 
 // eslint-disable-next-line react/prop-types
 function SessionChart({ id }) {
@@ -57,7 +82,7 @@ function SessionChart({ id }) {
             }}
           />
           <YAxis hide /> {/* Cache l'axe Y */}
-          <Tooltip cursor={false} />
+          <Tooltip cursor={<CustomCursor />} />
           <Line
             type="monotone"
             dataKey="sessionLength"
@@ -72,4 +97,5 @@ function SessionChart({ id }) {
     </div>
   );
 }
+
 export default SessionChart;

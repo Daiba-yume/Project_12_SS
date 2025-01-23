@@ -14,17 +14,19 @@ function Home() {
   return (
     <>
       <SideBar />
-      <div className="main-content">
-        <div className="left-content">
-          <UserProfile id={id} />
-          <ActivityChart id={id} />
-          <div className="row-chart">
-            <SessionChart id={id} />
-            <Performance id={id} />
-            <ScoreChart id={id} />
+      <div className="layout">
+        <div className="main-content">
+          <div className="left-content">
+            <UserProfile id={id} />
+            <ActivityChart id={id} />
+            <div className="row-chart">
+              <SessionChart id={id} />
+              <Performance id={id} />
+              <ScoreChart id={id} />
+            </div>
           </div>
+          <NutritionBloc id={id} />
         </div>
-        <NutritionBloc id={id} />
       </div>
     </>
   );
