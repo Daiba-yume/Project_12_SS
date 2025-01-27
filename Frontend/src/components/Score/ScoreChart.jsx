@@ -19,16 +19,7 @@ function ScoreChart({ id }) {
         const data = await getUserScoreData(id);
         console.log("Données brutes reçues :", data);
 
-        // - On vérifie si `todayScore` existe, sinon on vérifie `score`, sinon on utilise `data` directement
-        const finalScore = data && (data.todayScore || data.score || data);
-
-        // On Vérifie si le score est valide (doit être un nombre positif ou égal à zéro)
-        if (finalScore >= 0) {
-          // Si le score est valide, mettre à jour l'état avec ce score (multiplié par 100 pour l'affichage)
-          setUserData([{ name: "Score", value: finalScore * 100 }]);
-        } else {
-          console.error("Données de score invalides :", finalScore);
-        }
+        setUserData([{ name: "Score", value: data.score * 100 }]);
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }
