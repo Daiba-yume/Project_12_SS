@@ -2,22 +2,21 @@
   display: flex;
   flex-direction: column;
   width: 20%;
-  margin-top: 135px;
-  gap: 30px;
+  margin-top: 160px;
+  gap: 45px;
   .nutriInfo {
     display: flex;
     align-items: center;
     background-color: #fbfbfb;
     padding: 20px;
-    height: 70px;
+    height: 60px;
     border-radius: 5px;
     .icon {
       display: flex;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      align-items: center;
-      margin-right: 30px;
+      margin-right: 20px;
+      img {
+        width: 90%;
+      }
     }
   }
   .details {
