@@ -11,7 +11,7 @@ import {
 
 // eslint-disable-next-line react/prop-types
 function Performance({ id }) {
-  const [userPerformance, setUserPerformance] = useState(null);
+  const [userPerformance, setUserPerformance] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {

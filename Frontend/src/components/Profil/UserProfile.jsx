@@ -4,7 +4,7 @@ import { getUserInfoData } from "../../Service/apiService";
 import { useEffect, useState } from "react";
 
 const UserProfile = ({ id }) => {
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {

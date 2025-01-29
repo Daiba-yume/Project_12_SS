@@ -14,4 +14,15 @@
     font-size: 15px;
     font-weight: 600;
   }
+
+  .customTooltip {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: #e60000;
+    color: white;
+    padding: 15px 10px;
+    font-size: 12px;
+    text-align: center;
+  }
 }

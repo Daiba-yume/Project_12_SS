@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { getUserActivityData } from "../../Service/apiService";
 import {
@@ -8,12 +9,24 @@ import {
   Tooltip,
   CartesianGrid,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 import "./ActivityChart.scss";
 
-// eslint-disable-next-line react/prop-types
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="customTooltip">
+        <p className="label">{`${payload[0].value}kg`}</p>
+        <p className="label">{`${payload[1].value}Kcal`}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
 const ActivityChart = ({ id }) => {
-  const [userActivity, setUserActivity] = useState(null); // stocke les données d'activité de l'utilisateur
+  const [userActivity, setUserActivity] = useState([]); // stocke les données d'activité de l'utilisateur
 
   // récupére les données de l'utilisateur lorsque l'ID change
   useEffect(() => {
@@ -69,7 +82,21 @@ const ActivityChart = ({ id }) => {
             tickLine={false}
             hide
           />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend
+            verticalAlign="top"
+            align="right"
+            iconType="circle"
+            iconSize={8}
+            wrapperStyle={{
+              top: -10,
+              right: 20,
+              fontSize: "14px",
+            }}
+            formatter={(value) => (
+              <span style={{ marginLeft: 10, color: "#74798C" }}>{value}</span>
+            )}
+          />
           <Bar
             dataKey="kilogram"
             fill="#282D30"
@@ -80,7 +107,7 @@ const ActivityChart = ({ id }) => {
           <Bar
             dataKey="calories"
             fill="#E60000"
-            name="Calories brûlées"
+            name="Calories brûlées (Kcal)"
             radius={[10, 10, 0, 0]}
             yAxisId="left"
           />

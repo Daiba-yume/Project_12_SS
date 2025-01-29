@@ -8,7 +8,7 @@ import { getUserKpisData } from "../../Service/apiService";
 import { useEffect, useState } from "react";
 
 function NutritionBloc({ id }) {
-  const [userKpis, setUserKpis] = useState(null);
+  const [userKpis, setUserKpis] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,9 @@ function NutritionBloc({ id }) {
         </div>
         <div className="details">
           <p className="value">
-            {userKpis.calorieCount.toLocaleString("en-US")}kCal
+            {userKpis.calorieCount
+              ? userKpis.calorieCount.toLocaleString("en-US") + "kCal"
+              : ""}
           </p>
           <p className="label">Calories</p>
         </div>
@@ -43,7 +45,9 @@ function NutritionBloc({ id }) {
           <img src={proteinsIcon} alt="Protéines" />
         </div>
         <div className="details">
-          <p className="value">{userKpis.proteinCount}g</p>
+          <p className="value">
+            {userKpis.proteinCount ? userKpis.proteinCount + "g" : ""}
+          </p>
           <p className="label">Protéines</p>
         </div>
       </div>
@@ -53,7 +57,9 @@ function NutritionBloc({ id }) {
           <img src={glucidesIcon} alt="Glucides" />
         </div>
         <div className="details">
-          <p className="value">{userKpis.carbohydrateCount}g</p>
+          <p className="value">
+            {userKpis.carbohydrateCount ? userKpis.carbohydrateCount + "g" : ""}
+          </p>
           <p className="label">Glucides</p>
         </div>
       </div>
@@ -63,7 +69,9 @@ function NutritionBloc({ id }) {
           <img src={lipidesIcon} alt="Lipides" />
         </div>
         <div className="details">
-          <p className="value">{userKpis.lipidCount}g</p>
+          <p className="value">
+            {userKpis.lipidCount ? userKpis.lipidCount + "g" : ""}
+          </p>
           <p className="label">Lipides</p>
         </div>
       </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { getUserSessionData } from "../../Service/apiService";
 import { useEffect, useState } from "react";
 import {
@@ -10,34 +11,24 @@ import {
   Rectangle,
 } from "recharts";
 import "./SessionChart.scss";
-import PropTypes from "prop-types";
 
 /* Custom Tooltip */
 const CustomCursor = ({ points }) => {
-  const { x } = points[0]; // Prend la position `x` de la souris
+  const { x, y } = points[0]; // Prend la position `x` de la souris
   return (
     <Rectangle
       fill="#000000"
-      x={x}
+      x={x - 25}
       opacity={0.1}
-      y={0}
+      y={y - 10}
       width={500}
       height={200}
     />
   );
 };
-// Validation des props pour CustomCursor
-CustomCursor.propTypes = {
-  points: PropTypes.arrayOf(
-    PropTypes.shape({
-      x: PropTypes.number.isRequired, // Chaque point doit avoir `x` comme nombre
-    }).isRequired
-  ),
-};
 
-// eslint-disable-next-line react/prop-types
 function SessionChart({ id }) {
-  const [userSession, setUserSession] = useState(null);
+  const [userSession, setUserSession] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
