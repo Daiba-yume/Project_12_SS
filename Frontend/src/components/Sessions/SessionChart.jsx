@@ -12,8 +12,19 @@ import {
 } from "recharts";
 import "./SessionChart.scss";
 
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="customTooltip">
+        <p className="tooltipText">{`${payload[0].value} min`}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
 /* Custom Tooltip */
-const CustomCursor = ({ points }) => {
+const CustomCursor = ({ points, width, height }) => {
   const { x, y } = points[0]; // Prend la position `x` de la souris
   return (
     <Rectangle
@@ -21,8 +32,8 @@ const CustomCursor = ({ points }) => {
       x={x - 25}
       opacity={0.1}
       y={y - 10}
-      width={500}
-      height={200}
+      width={width * 100}
+      height={height * 200}
     />
   );
 };
@@ -73,7 +84,7 @@ function SessionChart({ id }) {
             }}
           />
           <YAxis hide /> {/* Cache l'axe Y */}
-          <Tooltip cursor={<CustomCursor />} />
+          <Tooltip content={<CustomTooltip />} cursor={<CustomCursor />} />
           <Line
             type="monotone"
             dataKey="sessionLength"

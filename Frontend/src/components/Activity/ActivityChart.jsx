@@ -51,11 +51,13 @@ const ActivityChart = ({ id }) => {
       <ResponsiveContainer width="100%" height={200}>
         <BarChart
           data={userActivity} // Passez les sessions comme données
-          margin={{ top: 40, right: 10, left: 50, bottom: 5 }}
+          margin={{ top: 5, right: 0, left: 20, bottom: 5 }}
           barSize={10}
           barGap={8}
+          width={800}
+          height={250}
         >
-          <CartesianGrid strokeDasharray="2" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis
             dataKey="day"
             width={"auto"}
@@ -101,6 +103,7 @@ const ActivityChart = ({ id }) => {
             dataKey="kilogram"
             fill="#282D30"
             name="Poids (kg)"
+            barSize={7}
             radius={[10, 10, 0, 0]}
             yAxisId="right"
           />
@@ -108,6 +111,7 @@ const ActivityChart = ({ id }) => {
             dataKey="calories"
             fill="#E60000"
             name="Calories brûlées (Kcal)"
+            barSize={7}
             radius={[10, 10, 0, 0]}
             yAxisId="left"
           />

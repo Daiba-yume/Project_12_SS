@@ -31,7 +31,7 @@ function Performance({ id }) {
 
   return (
     <div className="perfoContainer">
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer width="100%" height="100%">
         <RadarChart data={userPerformance} cx="50%" cy="50%" outerRadius="70%">
           {/* Désactivation des lignes radiales */}
           <PolarGrid radialLines={false} />
