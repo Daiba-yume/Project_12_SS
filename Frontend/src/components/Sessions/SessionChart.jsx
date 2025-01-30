@@ -32,7 +32,7 @@ const CustomCursor = ({ points, width, height }) => {
       fill="#000000"
       x={x - 25}
       opacity={0.1}
-      y={y - 10}
+      y={y - 20}
       width={width * 100}
       height={height * 200}
     />
@@ -64,7 +64,7 @@ function SessionChart({ id }) {
         </div>
         <LineChart
           data={userSession}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 10, right: 30, left: 20, bottom: 5 }}
         >
           {/* Dégradé linéaire du graphique */}
           <defs>
@@ -76,6 +76,9 @@ function SessionChart({ id }) {
           </defs>
           <XAxis
             dataKey="day"
+            tickFormatter={(day) =>
+              ["L", "M", "M", "J", "V", "S", "D"][day - 1]
+            }
             color="#ffffff"
             tickLine={false}
             axisLine={false}
@@ -87,10 +90,11 @@ function SessionChart({ id }) {
               fill: "#ffffff",
             }}
           />
-          <YAxis hide /> {/* Cache l'axe Y */}
+          <YAxis hide domain={["dataMin - 10", "dataMax + 10"]} />
+          {/* Cache l'axe Y */}
           <Tooltip content={<CustomTooltip />} cursor={<CustomCursor />} />
           <Line
-            type="monotone"
+            type="natural"
             dataKey="sessionLength"
             stroke="url(#gradient)"
             strokeWidth={2}

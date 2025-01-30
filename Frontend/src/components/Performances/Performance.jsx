@@ -40,7 +40,7 @@ function Performance({ id }) {
             name="Performance"
             dataKey="value"
             fill="#E60000"
-            fillOpacity={0.8}
+            fillOpacity={0.6}
           />
         </RadarChart>
       </ResponsiveContainer>
