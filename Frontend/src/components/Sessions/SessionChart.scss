@@ -6,11 +6,20 @@
   padding: 10px;
   background-color: #ff0000;
   border-radius: 5px;
-  .sessionTitle {
-    font-size: 15px;
-    color: #ffffff;
-    opacity: 0.5;
+  .titleApp {
+    position: absolute;
+    margin: 20px 35px 0 20px;
+    z-index: 100;
+
+    h2 {
+      font-size: 15px;
+      color: #ffffff;
+      font-weight: 100;
+      width: 145px;
+      opacity: 0.5;
+    }
   }
+
   .customTooltip {
     background: white;
     color: black;

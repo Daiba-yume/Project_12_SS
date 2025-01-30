@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import "./SessionChart.scss";
 
+/* Custom Tooltip bloc de time */
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
@@ -23,7 +24,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-/* Custom Tooltip */
+/* Custom Cursor partie sombre */
 const CustomCursor = ({ points, width, height }) => {
   const { x, y } = points[0]; // Prend la position `x` de la souris
   return (
@@ -56,8 +57,11 @@ function SessionChart({ id }) {
   }
   return (
     <div className="sessionContainer">
-      <ResponsiveContainer width="100%" height={200}>
-        <h1 className="sessionTitle">Durée moyenne des sessions</h1>
+      <ResponsiveContainer width="100%" height="100%">
+        {" "}
+        <div className="titleApp">
+          <h2>Durée moyenne des sessions</h2>
+        </div>
         <LineChart
           data={userSession}
           margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
@@ -92,7 +96,27 @@ function SessionChart({ id }) {
             strokeWidth={2}
             strokeOpacity={1}
             dot={null}
-            activeDot={{ r: 4, fill: "white" }}
+            /* POINT BLANC */
+            activeDot={({ cx, cy }) => (
+              <>
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={5}
+                  fill="#FFFFFF"
+                  stroke="#FFF"
+                  strokeWidth={2}
+                />
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={8}
+                  fill="none"
+                  stroke="rgba(255, 255, 255, 0.3)"
+                  strokeWidth={8}
+                />
+              </>
+            )}
           />
         </LineChart>
       </ResponsiveContainer>
