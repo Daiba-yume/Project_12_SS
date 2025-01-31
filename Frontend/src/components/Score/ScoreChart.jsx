@@ -48,21 +48,19 @@ function ScoreChart({ id }) {
   return (
     <div className="scoreContainer">
       <h1>Score</h1>
-      <ResponsiveContainer className="chartScore" width="100%" height="100%">
+      <ResponsiveContainer className="chartScore" width="100%" height="90%">
         <RadialBarChart
           data={userData}
+          cx="50%"
+          cy="50%"
+          barSize={10}
           innerRadius={70}
           outerRadius={80}
           startAngle={90}
-          endAngle={450}
+          endAngle={360}
         >
           <Legend content={legendScore} />
-          <RadialBar
-            dataKey="value"
-            cornerRadius={20}
-            style={{ zIndex: "2" }}
-            fill="#E60000"
-          />
+          <RadialBar dataKey="value" cornerRadius={20} fill="#E60000" />
           <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
         </RadialBarChart>
       </ResponsiveContainer>
