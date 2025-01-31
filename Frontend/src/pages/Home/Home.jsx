@@ -12,14 +12,14 @@ function Home() {
   const { id } = useParams(); /*  récupérer l'ID depuis l'URL. */
   console.log("User ID:", id);
   return (
-    <>
+    <section className="mainSection">
       <SideBar />
-      <div className="layout">
-        <div className="main-content">
-          <div className="left-content">
-            <UserProfile id={id} />
+      <div className="mainContent">
+        <UserProfile id={id} />
+        <div className="secondContent">
+          <div className="charts">
             <ActivityChart id={id} />
-            <div className="row-chart">
+            <div className="rowChart">
               <SessionChart id={id} />
               <Performance id={id} />
               <ScoreChart id={id} />
@@ -28,7 +28,7 @@ function Home() {
           <NutritionBloc id={id} />
         </div>
       </div>
-    </>
+    </section>
   );
 }
 

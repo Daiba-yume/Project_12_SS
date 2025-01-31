@@ -24,57 +24,49 @@ function NutritionBloc({ id }) {
     return <p>Aucune donnée Kpis trouvée pour cet utilisateur.</p>;
   }
 
+  const nutrients = [
+    {
+      label: "Calories",
+      value: userKpis.calorieCount,
+      unit: "kCal",
+      icon: caloriesIcon,
+    },
+    {
+      label: "Proteins",
+      value: userKpis.proteinCount,
+      unit: "g",
+      icon: proteinsIcon,
+    },
+    {
+      label: "Glucides",
+      value: userKpis.carbohydrateCount,
+      unit: "g",
+      icon: glucidesIcon,
+    },
+    {
+      label: "Lipides",
+      value: userKpis.lipidCount,
+      unit: "g",
+      icon: lipidesIcon,
+    },
+  ];
+
   return (
     <div className="nutriBloc">
-      <div className="nutriInfo">
-        <div className="icon">
-          <img src={caloriesIcon} alt="Calories" />
+      {nutrients.map(({ label, value, unit, icon }, index) => (
+        <div className="nutriInfo" key={index}>
+          <div className="icon">
+            <img src={icon} alt={label} />
+          </div>
+          <div className="details">
+            <p className="value">
+              {/* Affiche la valeur de la nutrition avec son unité, formatée avec une virgule pour les milliers */}
+              {value ? value.toLocaleString("en-US") + unit : ""}
+            </p>
+            <p className="label">{label}</p>
+          </div>
         </div>
-        <div className="details">
-          <p className="value">
-            {userKpis.calorieCount
-              ? userKpis.calorieCount.toLocaleString("en-US") + "kCal"
-              : ""}
-          </p>
-          <p className="label">Calories</p>
-        </div>
-      </div>
-
-      <div className="nutriInfo">
-        <div className="icon">
-          <img src={proteinsIcon} alt="Protéines" />
-        </div>
-        <div className="details">
-          <p className="value">
-            {userKpis.proteinCount ? userKpis.proteinCount + "g" : ""}
-          </p>
-          <p className="label">Protéines</p>
-        </div>
-      </div>
-
-      <div className="nutriInfo">
-        <div className="icon">
-          <img src={glucidesIcon} alt="Glucides" />
-        </div>
-        <div className="details">
-          <p className="value">
-            {userKpis.carbohydrateCount ? userKpis.carbohydrateCount + "g" : ""}
-          </p>
-          <p className="label">Glucides</p>
-        </div>
-      </div>
-
-      <div className="nutriInfo">
-        <div className="icon">
-          <img src={lipidesIcon} alt="Lipides" />
-        </div>
-        <div className="details">
-          <p className="value">
-            {userKpis.lipidCount ? userKpis.lipidCount + "g" : ""}
-          </p>
-          <p className="label">Lipides</p>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }

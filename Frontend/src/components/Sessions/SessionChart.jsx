@@ -30,11 +30,11 @@ const CustomCursor = ({ points, width, height }) => {
   return (
     <Rectangle
       fill="#000000"
-      x={x - 25}
+      x={x}
       opacity={0.1}
-      y={y - 20}
-      width={width * 100}
-      height={height * 200}
+      y={y}
+      width={width}
+      height={height * 100}
     />
   );
 };
@@ -57,15 +57,11 @@ function SessionChart({ id }) {
   }
   return (
     <div className="sessionContainer">
+      <div className="titleApp">
+        <h2>Durée moyenne des sessions</h2>
+      </div>
       <ResponsiveContainer width="100%" height="100%">
-        {" "}
-        <div className="titleApp">
-          <h2>Durée moyenne des sessions</h2>
-        </div>
-        <LineChart
-          data={userSession}
-          margin={{ top: 10, right: 30, left: 20, bottom: 5 }}
-        >
+        <LineChart data={userSession} margin={{ top: 0, bottom: 10 }}>
           {/* Dégradé linéaire du graphique */}
           <defs>
             <linearGradient id="gradient">
@@ -79,11 +75,10 @@ function SessionChart({ id }) {
             tickFormatter={(day) =>
               ["L", "M", "M", "J", "V", "S", "D"][day - 1]
             }
-            color="#ffffff"
             tickLine={false}
             axisLine={false}
             dy={10}
-            padding={{ left: 10, right: 10 }}
+            padding={{ left: 0, right: 0 }}
             style={{
               fontSize: "12px",
               opacity: "0.66",

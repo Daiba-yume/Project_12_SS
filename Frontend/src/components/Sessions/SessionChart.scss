@@ -1,12 +1,11 @@
 .sessionContainer {
   width: 30%;
-  margin-top: 20px;
-  padding: 10px;
+  height: 100%;
   background-color: #ff0000;
   border-radius: 5px;
   .titleApp {
     position: absolute;
-    margin: 20px 35px 0 20px;
+    margin: 20px 35px 0 30px;
     z-index: 100;
 
     h2 {

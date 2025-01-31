@@ -48,7 +48,7 @@ const ActivityChart = ({ id }) => {
   return (
     <div className="activityContainer">
       <h1>Activité quotidienne</h1>
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={userActivity} // Passez les sessions comme données
           margin={{ top: 5, right: 0, left: 20, bottom: 5 }}
@@ -60,11 +60,13 @@ const ActivityChart = ({ id }) => {
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis
             dataKey="day"
+            tickFormatter={(_, index) => index + 1} // Remplace les dates par des nombres séquentiels (1, 2, 3...)
             width={"auto"}
             tickLine={false}
             axisLine={{ stroke: "#d1d2d6", strokeWidth: "2" }}
-            padding={{ left: -40, right: -40 }}
-            dy={15}
+            padding={{ left: -50, right: -50 }}
+            dy={5}
+            tick={{ fill: "#9B9EAC" }} // Applique couleur aux chiffres sur l'axe X
           />
           {/* POIDS */}
           <YAxis
@@ -75,6 +77,7 @@ const ActivityChart = ({ id }) => {
             dx={25}
             domain={["dataMin -1", "dataMax +2"]}
             interval={1}
+            tick={{ fill: "#9B9EAC" }} // Applique couleur aux chiffres sur l'axe Y to the right
           />
           {/* CALORIES */}
           <YAxis

@@ -1,27 +1,28 @@
 .scoreContainer {
-  position: relative;
   width: 30%;
-  margin-top: 20px;
-  padding: 10px;
+  height: 100%;
   background-color: #fbfbfb;
   border-radius: 5px;
   h1 {
     font-size: 15px;
     font-weight: 500;
   }
-
+  .chartScore {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+  }
   .legendScore {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80px;
-    height: 80px;
-    bottom: 30px;
-    left: 80px;
+    justify-content: center;
     background-color: #ffffff;
     border-radius: 50%;
-    padding: 40px 25px 10px;
+    width: 120px;
+    height: 120px;
     .score {
       font-size: 26px;
       font-weight: 700;

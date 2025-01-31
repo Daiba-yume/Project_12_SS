@@ -48,7 +48,7 @@ function ScoreChart({ id }) {
   return (
     <div className="scoreContainer">
       <h1>Score</h1>
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer className="chartScore" width="100%" height="100%">
         <RadialBarChart
           data={userData}
           innerRadius={70}
@@ -60,7 +60,7 @@ function ScoreChart({ id }) {
           <RadialBar
             dataKey="value"
             cornerRadius={20}
-            style={{ zIndex: "2", position: "absolute" }}
+            style={{ zIndex: "2" }}
             fill="#E60000"
           />
           <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
