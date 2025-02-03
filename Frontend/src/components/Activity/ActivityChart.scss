@@ -16,11 +16,12 @@
   .customTooltip {
     display: flex;
     flex-direction: column;
-    gap: 30px;
     background-color: #e60000;
     color: white;
-    padding: 15px 10px;
-    font-size: 12px;
+    padding: 15px 5px 2px 5px;
     text-align: center;
+    .label {
+      font-size: 12px;
+    }
   }
 }
