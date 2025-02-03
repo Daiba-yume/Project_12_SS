@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import "./Landing.scss"; // Optionnel, si tu veux ajouter du style
+import "./Landing.scss";
 
 function Landing() {
   return (
-    <section className="landing-container">
+    <div className="landing-container">
       <h1>Bienvenue sur SportSee !</h1>
-      <p>Sélectionner votre profil pour suivre vos performances :</p>
+      <p>Sélectionnez votre profil pour suivre vos performances.</p>
       <div className="buttons">
         <Link to="/user/18">
           <button>Utilisateur 18</button>
@@ -14,7 +14,7 @@ function Landing() {
           <button>Utilisateur 12</button>
         </Link>
       </div>
-    </section>
+    </div>
   );
 }
 
