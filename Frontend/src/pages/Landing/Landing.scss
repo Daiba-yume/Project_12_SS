@@ -1,0 +1,36 @@
+.landing-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #e60000;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ff0000;
+  transform: scale(1.05);
+}
