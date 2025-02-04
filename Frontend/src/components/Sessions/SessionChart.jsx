@@ -78,14 +78,14 @@ function SessionChart({ id }) {
             tickLine={false}
             axisLine={false}
             dy={10}
-            padding={{ left: 0, right: 0 }}
+            padding={{ left: 5, right: 5 }}
             style={{
               fontSize: "12px",
               opacity: "0.66",
               fill: "#ffffff",
             }}
           />
-          <YAxis hide domain={["dataMin - 10", "dataMax + 10"]} />
+          <YAxis hide domain={["dataMin - 5", "dataMax + 20"]} />
           {/* Cache l'axe Y */}
           <Tooltip content={<CustomTooltip />} cursor={<CustomCursor />} />
           <Line

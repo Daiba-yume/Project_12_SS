@@ -32,14 +32,22 @@ function Performance({ id }) {
   return (
     <div className="perfoContainer">
       <ResponsiveContainer width="100%" height="100%">
-        <RadarChart data={userPerformance} cx="50%" cy="50%" outerRadius="70%">
+        <RadarChart
+          data={userPerformance}
+          cx="48%"
+          cy="50%"
+          outerRadius={window.innerWidth > 1024 ? "70%" : "50%"}
+        >
           {/* Désactivation des lignes radiales */}
-          <PolarGrid radialLines={false} />
-          <PolarAngleAxis dataKey="kind" />
+          <PolarGrid className="radarGrid" radialLines={false} />
+          <PolarAngleAxis
+            dataKey="kind"
+            tick={{ fontSize: 10, fill: "#fff", dy: 4 }}
+          />
           <Radar
             name="Performance"
             dataKey="value"
-            fill="#E60000"
+            fill="#FF0101"
             fillOpacity={0.6}
           />
         </RadarChart>
