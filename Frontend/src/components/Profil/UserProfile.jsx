@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import "./UserProfile.scss";
 import { getUserInfoData } from "../../Service/apiService";
 import { useEffect, useState } from "react";

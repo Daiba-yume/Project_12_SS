@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import "./NutritionBloc.scss";
 import caloriesIcon from "../../assets/calories.png";
 import proteinsIcon from "../../assets/proteins.png";

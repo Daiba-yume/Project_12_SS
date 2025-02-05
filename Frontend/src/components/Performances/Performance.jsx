@@ -9,7 +9,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// eslint-disable-next-line react/prop-types
 function Performance({ id }) {
   const [userPerformance, setUserPerformance] = useState([]);
 

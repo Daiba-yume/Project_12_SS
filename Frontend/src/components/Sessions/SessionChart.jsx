@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { getUserSessionData } from "../../Service/apiService";
 import { useEffect, useState } from "react";
 import {
