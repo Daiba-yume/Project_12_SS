@@ -10,14 +10,14 @@ import { useEffect, useState } from "react";
 import { getUserScoreData } from "../../Service/apiService";
 
 function ScoreChart({ id }) {
-  const [userData, setUserData] = useState([]);
-
+  const [userData, setUserData] = useState([]); // stock les datas
+  // On récupére les données score au chargement ou quand l'id change
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getUserScoreData(id);
+        const data = await getUserScoreData(id); // call API to recover les datas
         console.log("Données brutes reçues :", data);
-
+        // On formate et met à jour le state avec les données du score
         setUserData([{ name: "Score", value: (data?.score || 0) * 100 }]);
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
@@ -25,9 +25,9 @@ function ScoreChart({ id }) {
     };
 
     if (id) {
-      fetchData();
+      fetchData(); // recover datas if id present
     }
-  }, [id]);
+  }, [id]); // If "id" change relance l'éxécution
 
   // Vérification des données
   if (!userData) {
@@ -45,7 +45,7 @@ function ScoreChart({ id }) {
     </div>
   );
   return (
-    <div className="scoreContainer">
+    <section className="scoreContainer">
       <h1>Score</h1>
       <ResponsiveContainer className="chartScore" width="100%" height="90%">
         <RadialBarChart
@@ -63,7 +63,7 @@ function ScoreChart({ id }) {
           <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
         </RadialBarChart>
       </ResponsiveContainer>
-    </div>
+    </section>
   );
 }
 export default ScoreChart;

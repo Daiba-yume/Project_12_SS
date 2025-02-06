@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import "./SessionChart.scss";
 
-/* Custom Tooltip bloc de time */
+/* Custom Tooltip bloc durée des sessions */
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
@@ -23,7 +23,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-/* Custom Cursor partie sombre */
+/* Custom Cursor partie sombre au hover */
 const CustomCursor = ({ points, width, height }) => {
   const { x, y } = points[0]; // Prend la position `x` de la souris
   return (
@@ -39,23 +39,24 @@ const CustomCursor = ({ points, width, height }) => {
 };
 
 function SessionChart({ id }) {
-  const [userSession, setUserSession] = useState([]);
+  const [userSession, setUserSession] = useState([]); // stock les datas
 
+  // On récupére les données sessions au chargement ou quand l'id change
   useEffect(() => {
     const fetchData = async () => {
-      const sessions = await getUserSessionData(id);
-      setUserSession(sessions);
+      const sessions = await getUserSessionData(id); // call API to recover les datas
+      setUserSession(sessions); // met à jour l'état userSession avec les dataMocked
     };
     if (id) {
-      fetchData();
+      fetchData(); // recover datas if id present
     }
-  }, [id]);
+  }, [id]); // If "id" change relance l'éxécution
 
   if (!userSession) {
     return <p>Acune donnée session trouvée pour cet utilisateur</p>;
   }
   return (
-    <div className="sessionContainer">
+    <section className="sessionContainer">
       <div className="titleApp">
         <h2>Durée moyenne des sessions</h2>
       </div>
@@ -118,7 +119,7 @@ function SessionChart({ id }) {
           />
         </LineChart>
       </ResponsiveContainer>
-    </div>
+    </section>
   );
 }
 

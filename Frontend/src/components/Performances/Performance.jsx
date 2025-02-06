@@ -10,26 +10,26 @@ import {
 } from "recharts";
 
 function Performance({ id }) {
-  const [userPerformance, setUserPerformance] = useState([]);
+  const [userPerformance, setUserPerformance] = useState([]); // stock les datas
 
+  // On récupére les données performances au chargement ou quand l'id change
   useEffect(() => {
     const fetchData = async () => {
-      const performance = await getUserPerformanceData(id);
-
-      console.log("Données récupérées :", performance); // Ajout pour debug
-      setUserPerformance(performance);
+      const performance = await getUserPerformanceData(id); // call API to recover les datas
+      setUserPerformance(performance); // met à jour l'état userPerformance avec les dataMocked
     };
     if (id) {
-      fetchData();
+      fetchData(); // recover datas if id present
     }
-  }, [id]);
+  }, [id]); // If "id" change relance l'éxécution
+
   // Vérification des données
   if (!userPerformance) {
     return <p>Aucune donnée performance trouvée pour cet utilisateur.</p>;
   }
 
   return (
-    <div className="perfoContainer">
+    <section className="perfoContainer">
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart
           data={userPerformance}
@@ -51,7 +51,7 @@ function Performance({ id }) {
           />
         </RadarChart>
       </ResponsiveContainer>
-    </div>
+    </section>
   );
 }
 export default Performance;

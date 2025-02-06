@@ -7,17 +7,18 @@ import { getUserKpisData } from "../../Service/apiService";
 import { useEffect, useState } from "react";
 
 function NutritionBloc({ id }) {
-  const [userKpis, setUserKpis] = useState({});
+  const [userKpis, setUserKpis] = useState({}); // stock les datas
 
+  // On récupére les données KPIS au chargement ou quand l'id change
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getUserKpisData(id);
-      setUserKpis(data);
+      const data = await getUserKpisData(id); // call API to recover les datas
+      setUserKpis(data); // met à jour l'état userKPIS avec les dataMocked
     };
     if (id) {
-      fetchData();
+      fetchData(); // recover datas if id present
     }
-  }, [id]);
+  }, [id]); // If "id" change relance l'éxécution
 
   if (!userKpis) {
     return <p>Aucune donnée Kpis trouvée pour cet utilisateur.</p>;
@@ -51,7 +52,7 @@ function NutritionBloc({ id }) {
   ];
 
   return (
-    <div className="nutriBloc">
+    <section className="nutriBloc">
       {nutrients.map(({ label, value, unit, icon }, index) => (
         <div className="nutriInfo" key={index}>
           <div className="icon">
@@ -66,7 +67,7 @@ function NutritionBloc({ id }) {
           </div>
         </div>
       ))}
-    </div>
+    </section>
   );
 }
 

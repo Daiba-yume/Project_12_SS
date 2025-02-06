@@ -27,17 +27,17 @@ const CustomTooltip = ({ active, payload }) => {
 const ActivityChart = ({ id }) => {
   const [userActivity, setUserActivity] = useState([]); // stocke les données d'activité de l'utilisateur
 
-  // récupére les données de l'utilisateur lorsque l'ID change
+  // On récupére les données de l'utilisateur au chargement ou lorsque l'ID change
   useEffect(() => {
     const fetchData = async () => {
-      const activity = await getUserActivityData(id); // Passez l'ID récupéré à la fonction getUserData
+      const activity = await getUserActivityData(id); // call API to recover les datas
       setUserActivity(activity); // met à jour l'état userActivity avec les dataMocked
     };
     // Si l'ID dispo, récupération des data
     if (id) {
       fetchData();
     }
-  }, [id]);
+  }, [id]); // If "id" change relance l'éxécution
 
   // Vérification des données
   if (!userActivity) {
@@ -45,7 +45,7 @@ const ActivityChart = ({ id }) => {
   }
 
   return (
-    <div className="activityContainer">
+    <section className="activityContainer">
       <h1>Activité quotidienne</h1>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
@@ -119,7 +119,7 @@ const ActivityChart = ({ id }) => {
           />
         </BarChart>
       </ResponsiveContainer>
-    </div>
+    </section>
   );
 };
 
