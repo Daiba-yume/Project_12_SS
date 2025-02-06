@@ -6,7 +6,11 @@ Objectif : Développez un tableau de bord d'analytics avec React
 
 Ce projet, utilise [React+Vite](https://vitejs.fr/guide/), [Recharts](https://recharts.org/en-US/guide) et [SASS](https://sass-lang.com/install/)
 
-## Liens utiles
+## Description
+
+Cette application permet aux utilisateurs de suivre le nombre de sessions réalisées ainsi que le nombre de calories brûlées
+
+### Liens utiles
 
 - [Maquette figma](https://www.figma.com/design/BMomGVZqLZb811mDMShpLu/UI-design-Sportify-FR?node-id=0-1)
 
@@ -17,5 +21,7 @@ Ce projet, utilise [React+Vite](https://vitejs.fr/guide/), [Recharts](https://re
 ### Installation
 
 - Installer les dépendances dans le fichier Frontend et backend avec la commande `npm install`
+
 - Ouvrez le terminal, placer vous dans le dossier Frontend (`cd Frontend`) puis lancer la commande `npm run dev`
+
 - Cliquez sur le lien, pour lancer le projet
