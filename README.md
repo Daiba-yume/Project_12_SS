@@ -1,14 +1,18 @@
 # SportSee
 
-Projet 12 - de la formation Openclassrooms - Développeur d'appliactions JS/React -
+Projet 12 - de la formation Openclassrooms - Développeur d'applications JS/React -
 
 Objectif : Développez un tableau de bord d'analytics avec React
 
-Ce projet, utilise [React+Vite](https://vitejs.fr/guide/), [Recharts](https://recharts.org/en-US/guide) et [SASS](https://sass-lang.com/install/)
+Ce projet, utilise :
+
+- [React+Vite](https://vitejs.fr/guide/)
+- [Recharts](https://recharts.org/en-US/guide)
+- [SASS](https://sass-lang.com/install/)
 
 ## Description
 
-Cette application permet aux utilisateurs de suivre le nombre de sessions réalisées ainsi que le nombre de calories brûlées
+Cette application permet aux utilisateurs de suivre le nombre de sessions réalisées ainsi que le nombre de calories brûlées.
 
 ### Liens utiles
 
@@ -22,6 +26,8 @@ Cette application permet aux utilisateurs de suivre le nombre de sessions réali
 
 - Installer les dépendances dans le fichier Frontend et Backend avec la commande `npm install`
 
-- Ouvrez le terminal, placer vous dans le dossier Frontend (`cd Frontend`) puis lancer la commande `npm run dev`
+- Ouvrez le terminal, placez-vous dans le dossier Backend (`cd Backend`) et lancer la commande `npm start`
 
-- Cliquez sur le lien, pour lancer le projet
+- Puis placez-vous dans le dossier Frontend (`cd Frontend`) puis lancer la commande `npm run dev`
+
+- Enfin cliquez sur le lien, pour lancer le projet
