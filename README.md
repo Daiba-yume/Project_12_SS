@@ -20,7 +20,7 @@ Cette application permet aux utilisateurs de suivre le nombre de sessions réali
 
 ### Installation
 
-- Installer les dépendances dans le fichier Frontend et backend avec la commande `npm install`
+- Installer les dépendances dans le fichier Frontend et Backend avec la commande `npm install`
 
 - Ouvrez le terminal, placer vous dans le dossier Frontend (`cd Frontend`) puis lancer la commande `npm run dev`
 
