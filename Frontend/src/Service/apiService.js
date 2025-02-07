@@ -24,7 +24,7 @@ export const getUserInfoData = async (userId) => {
   try {
     //Envoie de la requête GET pour récupérer les données
     const response = await api.get(`${userId}`);
-    const userData = response.data; // Stocke les données reçues de l'API
+    const userData = response.data.data.userInfos; // Stocke les données reçues de l'API
     return formatUserInfos(userData); // Formate les données et les renvoie
   } catch (error) {
     console.log(
@@ -46,7 +46,7 @@ export const getUserInfoData = async (userId) => {
 export const getUserKpisData = async (userId) => {
   try {
     const response = await api.get(`${userId}`);
-    const userData = response.data;
+    const userData = response.data.data.keyData;
     return formatUserKeyData(userData);
   } catch (error) {
     console.log("Erreur lors de la récupération des data users", error.message);
@@ -77,7 +77,7 @@ export const getUserActivityData = async (userId) => {
   try {
     //Envoie de la requête GET pour récupérer les données activity
     const response = await api.get(`${userId}/activity`);
-    const userData = response.data; // données user récup via l'API
+    const userData = response.data.data; // données user récup via l'API
     console.log(userData);
     // Formatage des données si l'API est accessible
     return formatUserActivity(userData);
@@ -117,7 +117,7 @@ export const getUserSessionData = async (userId) => {
   try {
     //Envoie de la requête GET pour récupérer les données sessions
     const response = await api.get(`${userId}/average-sessions`);
-    const userData = response.data; // Stocke les données reçues de l'API
+    const userData = response.data.data; // Stocke les données reçues de l'API
     return formatUserSession(userData); // Formate les données et les renvoie
   } catch (error) {
     // Si une erreur se produit lors de l'appel à l'API, on affiche un message d'erreur
@@ -154,7 +154,7 @@ export const getUserPerformanceData = async (userId) => {
   try {
     //Envoie de la requête GET pour récupérer les données performance
     const response = await api.get(`${userId}/performance`);
-    const userData = response.data; // Stocke les données reçues de l'API
+    const userData = response.data.data; // Stocke les données reçues de l'API
     return formatUserPerformance(userData); // Formate les données et les renvoie
   } catch (error) {
     console.log(
@@ -192,7 +192,7 @@ export const getUserScoreData = async (userId) => {
   try {
     //Envoie de la requête GET pour récupérer les données performance
     const response = await api.get(`${userId}`);
-    const userData = response.data; // Stocke les données reçues de l'API
+    const userData = response.data.data; // Stocke les données reçues de l'API
     return formatUserScore(userData); // Formate les données et les renvoie
   } catch (error) {
     console.log(
