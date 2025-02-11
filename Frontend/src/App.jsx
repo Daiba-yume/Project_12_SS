@@ -19,7 +19,7 @@ body{
   width: 100%;
   height: 100%;
   margin:auto;
-  overflow: hidden;
+  overflow-y: auto;
 }
 `;
 
