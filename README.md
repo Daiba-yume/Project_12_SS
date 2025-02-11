@@ -26,11 +26,11 @@ Cette application permet aux utilisateurs de suivre le nombre de sessions réali
 
 #### Configuration du fichier `.env`
 
-Dans ce projet on peut basculer entre les données simulées et les données de l'API en fonction de la valeur de la variable VITE_USE_MOCKED_DATA dans le fichier .env.
+Dans ce projet, on peut basculer entre les données simulées (mockées) et les données de l'API en fonction de la valeur de la variable VITE_USE_MOCKED_DATA dans le fichier .env.
 
-1.Créez un fichier .env dans la racine du dossier Frontend avec cette variable : VITE_USE_MOCKED_DATA
+1. Créez un fichier .env dans la racine du dossier Frontend avec cette variable : VITE_USE_MOCKED_DATA
 
-2.Choisir le mode de données à utiliser :
+2. Choisir le mode de données à utiliser :
 
 - Pour utiliser les données mockées, il faut spécifier VITE_USE_MOCKED_DATA=true
 
