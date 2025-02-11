@@ -11,6 +11,7 @@ import {
   Legend,
 } from "recharts";
 import "./ActivityChart.scss";
+import { useNavigate } from "react-router-dom";
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -26,18 +27,22 @@ const CustomTooltip = ({ active, payload }) => {
 
 const ActivityChart = ({ id }) => {
   const [userActivity, setUserActivity] = useState([]); // stocke les données d'activité de l'utilisateur
-
+  const navigate = useNavigate();
   // On récupére les données de l'utilisateur au chargement ou lorsque l'ID change
   useEffect(() => {
     const fetchData = async () => {
       const activity = await getUserActivityData(id); // call API to recover les datas
-      setUserActivity(activity); // met à jour l'état userActivity avec les dataMocked
+      if (!activity) {
+        navigate("/404");
+      } else {
+        setUserActivity(activity); // met à jour l'état userActivity avec les dataMocked
+      }
     };
     // Si l'ID dispo, récupération des data
     if (id) {
       fetchData();
     }
-  }, [id]); // If "id" change relance l'éxécution
+  }, [id, navigate]); // If "id" change relance l'éxécution
 
   // Vérification des données
   if (!userActivity) {

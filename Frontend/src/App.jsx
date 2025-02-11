@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import { createGlobalStyle } from "styled-components";
 import Home from "./pages/Home/Home";
 import Landing from "./pages/Landing/Landing";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -31,6 +32,7 @@ function App() {
         {/* Route dynamique pour l'ID utilisateur */}
         <Route path="/" element={<Landing />} />
         <Route path="/user/:id" element={<Home />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
