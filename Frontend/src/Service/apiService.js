@@ -65,12 +65,12 @@ export const getUserKpisData = async (userId) => {
         console.log("Aucune donnée simulée trouvée");
         return null;
       }
-      return formatUserKeyData(mockData.userInfos); // formate et renvoie les données simulées
+      return formatUserKeyData(mockData.keyData); // formate et renvoie les données simulées
     }
   } catch (error) {
     console.log("Erreur lors de la récupération des data users", error.message);
     // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
-    const mockData = getUserKpisData(userId);
+    const mockData = getUserMainMockData(userId);
     return mockData ? formatUserKeyData(mockData) : null; // Retourne les données simulées si disponibles
   }
 };
@@ -112,7 +112,7 @@ export const getUserActivityData = async (userId) => {
       error.response ? error.response.data : error.message
     );
     // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
-    const mockData = getUserActivityData(userId);
+    const mockData = getActivityMockedData(userId);
     return mockData ? formatUserActivity(mockData) : null;
   }
 };

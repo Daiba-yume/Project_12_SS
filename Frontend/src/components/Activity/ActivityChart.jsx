@@ -31,11 +31,17 @@ const ActivityChart = ({ id }) => {
   // On récupére les données de l'utilisateur au chargement ou lorsque l'ID change
   useEffect(() => {
     const fetchData = async () => {
-      const activity = await getUserActivityData(id); // call API to recover les datas
-      if (!activity) {
-        navigate("/404");
-      } else {
-        setUserActivity(activity); // met à jour l'état userActivity avec les dataMocked
+      try {
+        const activity = await getUserActivityData(id); // call API to recover les datas
+        if (!activity) {
+          // Si aucune donnée n'est retournée, on redirige vers la page 404
+          navigate("/404");
+        } else {
+          setUserActivity(activity); // met à jour l'état userActivity avec les dataMocked
+        }
+      } catch (error) {
+        console.log("Erreur lors de la récupération des données:", error);
+        navigate("/404"); // En cas d'erreur dans l'appel API, on redirige également
       }
     };
     // Si l'ID dispo, récupération des data
