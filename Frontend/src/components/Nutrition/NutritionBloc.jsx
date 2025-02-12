@@ -3,7 +3,7 @@ import caloriesIcon from "../../assets/calories.png";
 import proteinsIcon from "../../assets/proteins.png";
 import glucidesIcon from "../../assets/glucides.png";
 import lipidesIcon from "../../assets/lipides.png";
-import { getUserKpisData } from "../../Service/apiService";
+import { getUserData } from "../../Service/apiService";
 import { useEffect, useState } from "react";
 
 function NutritionBloc({ id }) {
@@ -12,8 +12,8 @@ function NutritionBloc({ id }) {
   // On récupére les données KPIS au chargement ou quand l'id change
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getUserKpisData(id); // call API to recover les datas
-      setUserKpis(data); // met à jour l'état userKPIS avec les dataMocked
+      const data = await getUserData(id); // call API to recover les datas
+      setUserKpis(data.keyData); // met à jour l'état userKPIS avec les dataMocked
     };
     if (id) {
       fetchData(); // recover datas if id present

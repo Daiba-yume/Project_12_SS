@@ -1,5 +1,5 @@
 import "./UserProfile.scss";
-import { getUserInfoData } from "../../Service/apiService";
+import { getUserData } from "../../Service/apiService";
 import { useEffect, useState } from "react";
 
 const UserProfile = ({ id }) => {
@@ -7,8 +7,8 @@ const UserProfile = ({ id }) => {
   // On récupére les données userInfos au chargement ou quand l'id change
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getUserInfoData(id); // call API to recover les datas
-      setUserInfo(data); // met à jour l'état userInfos avec les dataMocked
+      const data = await getUserData(id); // call API to recover les datas
+      setUserInfo(data.userInfos); // met à jour l'état userInfos avec les dataMocked
     };
     if (id) {
       fetchData(); // recover datas if id present

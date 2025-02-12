@@ -7,7 +7,7 @@ import {
   Legend,
 } from "recharts";
 import { useEffect, useState } from "react";
-import { getUserScoreData } from "../../Service/apiService";
+import { getUserData } from "../../Service/apiService";
 
 function ScoreChart({ id }) {
   const [userData, setUserData] = useState([]); // stock les datas
@@ -15,10 +15,10 @@ function ScoreChart({ id }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getUserScoreData(id); // call API to recover les datas
+        const data = await getUserData(id); // call API to recover les datas
         console.log("Données brutes reçues :", data);
         // On formate et met à jour le state avec les données du score
-        setUserData([{ name: "Score", value: (data?.score || 0) * 100 }]);
+        setUserData([{ name: "Score", value: (data?.score.score || 0) * 100 }]);
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }

@@ -18,62 +18,58 @@ const api = axios.create({
   timeout: 5000, // 5 sec de délais max (évite le blocage de la req, ex: soucis de rés ou serveur)
 });
 ///////////////////
+let isAlertShown = false; // Flag pour savoir si l'alerte a été déjà montrée
 ///////////////////
-/*  Fonction pour récupérer les données des usersInfo avec l'ID (API et mocked) */
-export const getUserInfoData = async (userId) => {
+// Fonction principale pour récupérer toutes les données d'un utilisateur (userInfos, keyData, score)
+export const getUserData = async (userId) => {
   const useMockedData = import.meta.env.VITE_USE_MOCKED_DATA === "true"; // Vérifie si on utilise les données simulées
   try {
+    let userData;
     if (!useMockedData) {
-      //Envoie de la requête GET pour récupérer les données API
+      // Un seul appel API pour récupérer toutes les données de l'utilisateur
       const response = await api.get(`${userId}`);
-      const userData = response.data.data.userInfos; // Stocke les données reçues de l'API
-      return formatUserInfos(userData); // Formate les données et les renvoie
+      userData = response.data.data; // Toutes les données sont dans "data"
     } else {
-      // On récupère les données simulées
-      const mockData = getUserMainMockData(userId); // Récupère les données simulées pour l'user
-      if (!mockData) {
-        console.log("Aucune donnée simulée trouvée");
-        return null; // si aucune donnée n'est trouvée return null
-      }
-      return formatUserInfos(mockData.userInfos); // sinon formate et renvoie les données simulées
-    }
-  } catch (error) {
-    console.log(
-      "Erreur lors de la récupération des data users ",
-      error.message
-    );
-    // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
-    const mockData = getUserMainMockData(userId);
-    return mockData ? formatUserInfos(mockData) : null; // Retourne les données simulées si disponibles
-  }
-};
-///////////////////
-///////////////////
-// Fonction pour récupèrer les données KeyData de l'user avec l'ID (API et mocked) */
-export const getUserKpisData = async (userId) => {
-  const useMockedData = import.meta.env.VITE_USE_MOCKED_DATA === "true"; // Vérifie si on utilise les données simulées
-  try {
-    if (!useMockedData) {
-      //Envoie de la requête GET pour récupérer les données API
-      const response = await api.get(`${userId}`);
-      const userData = response.data.data.keyData; // Stocke les données reçues de l'API
-      return formatUserKeyData(userData); // Formate les données et les renvoie
-    } else {
-      // On récupère les données simulées
-      const mockData = getUserMainMockData(userId);
-      if (!mockData) {
+      // Récupère les données simulées (mocked)
+      userData = getUserMainMockData(userId);
+      if (!userData) {
         console.log("Aucune donnée simulée trouvée");
         return null;
       }
-      return formatUserKeyData(mockData.keyData); // formate et renvoie les données simulées
     }
+    // Renvoyer les données formatées pour chaque section
+    return {
+      userInfos: formatUserInfos(userData.userInfos),
+      keyData: formatUserKeyData(userData.keyData),
+      score: formatUserScore(userData),
+    };
   } catch (error) {
-    console.log("Erreur lors de la récupération des data users", error.message);
-    // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
+    console.log(
+      "Erreur lors de la récupération des données de l'API :",
+      error.message
+    );
+    // Afficher l'alerte seulement si elle n'a pas été affichée
+    if (!isAlertShown) {
+      alert(
+        "L'API n'est pas accessible pour le moment. Les données mockées seront utilisées en attendant."
+      );
+      isAlertShown = true; // Marque que l'alerte a été montrée
+    }
+    // En cas d'erreur, utiliser les données simulées
     const mockData = getUserMainMockData(userId);
-    return mockData ? formatUserKeyData(mockData) : null; // Retourne les données simulées si disponibles
+    if (!mockData) {
+      console.log("Aucune donnée simulée trouvée");
+      return null;
+    }
+    // Retourne les données formatées à partir des données simulées
+    return {
+      userInfos: formatUserInfos(mockData.userInfos),
+      keyData: formatUserKeyData(mockData.keyData),
+      score: formatUserScore(mockData),
+    };
   }
 };
+///////////////////
 // Fonction pour récupérer les données simulées userInfos et KeyData(mockées)
 const getUserMainMockData = (userId) => {
   console.log(`Recherche des données pour l'utilisateur avec l'ID : ${userId}`);
@@ -108,12 +104,16 @@ export const getUserActivityData = async (userId) => {
     }
   } catch (error) {
     console.log(
-      "Erreur lors de la récupération des données utilisateurs :",
-      error.response ? error.response.data : error.message
+      "Erreur lors de la récupération des données de l'API :",
+      error.message
     );
     // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
     const mockData = getActivityMockedData(userId);
-    return mockData ? formatUserActivity(mockData) : null;
+    if (!mockData) {
+      console.log("Aucune donnée simulée trouvée");
+      return null;
+    }
+    return formatUserActivity(mockData);
   }
 };
 // Fonction pour récupérer les données simulées des sessions (mockées)
@@ -122,7 +122,6 @@ const getActivityMockedData = (userId) => {
   const activityMockData = USER_ACTIVITY.find(
     (activity) => activity.userId == userId
   );
-
   //On Vérifie si les données simulées existent pour chaque catégorie
   if (activityMockData) {
     return {
@@ -153,12 +152,18 @@ export const getUserSessionData = async (userId) => {
     }
   } catch (error) {
     // Si une erreur se produit lors de l'appel à l'API, on affiche un message d'erreur
-
-    console.log("Erreur lors de la réupération des datas users", error.message);
+    console.log(
+      "Erreur lors de la récupération des données de l'API :",
+      error.message
+    );
   }
   // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
-  const mockData = getUserSessionData(userId);
-  return mockData ? formatUserSession(mockData) : null;
+  const mockData = getSessionMockData(userId);
+  if (!mockData) {
+    console.log("Aucune donnée simulée trouvée");
+    return null;
+  }
+  return formatUserSession(mockData);
 };
 // Fonction pour récupérer les données simulées des sessions (mockées)
 // Cherche dans la liste USER_AVERAGE_SESSIONS si l'ID correspond à un utilisateur
@@ -196,12 +201,16 @@ export const getUserPerformanceData = async (userId) => {
     }
   } catch (error) {
     console.log(
-      "Erreur lors de la récupération des data users ",
+      "Erreur lors de la récupération des données de l'API :",
       error.message
     );
     // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
-    const mockData = getUserPerformanceData(userId);
-    return mockData ? formatUserPerformance(mockData) : null;
+    const mockData = getPerformanceMockData(userId);
+    if (!mockData) {
+      console.log("Aucune donnée simulée trouvée");
+      return null;
+    }
+    return formatUserPerformance(mockData);
   }
 };
 // Fonction pour récupérer les données simulées des performances (mockées)
@@ -218,34 +227,4 @@ const getPerformanceMockData = (userId) => {
     };
   }
   return null; // si aucun utilisateur n'est trouvé avec cet ID
-};
-///////////////////
-///////////////////
-/*  Fonction pour récupérer les données des usersScore avec l'ID (API et mocked) */
-export const getUserScoreData = async (userId) => {
-  const useMockedData = import.meta.env.VITE_USE_MOCKED_DATA === "true";
-  try {
-    if (!useMockedData) {
-      //Envoie de la requête GET pour récupérer les données
-      const response = await api.get(`${userId}`);
-      const userData = response.data.data; // Stocke les données reçues de l'API
-      return formatUserScore(userData); // Formate les données et les renvoie
-    } else {
-      // On récupère les données simulées
-      const mockData = getUserMainMockData(userId);
-      if (!mockData) {
-        console.log("Aucune donnée simulée trouvée");
-        return null;
-      }
-      return formatUserScore(mockData);
-    }
-  } catch (error) {
-    console.log(
-      "Erreur lors de la récupération des data users ",
-      error.message
-    );
-    // Si l'appel à l'API échoue,on utilise les données mockées (simulées)
-    const mockData = getUserMainMockData(userId);
-    return mockData ? formatUserScore(mockData) : null;
-  }
 };
