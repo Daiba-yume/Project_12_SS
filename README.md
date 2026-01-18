@@ -28,6 +28,12 @@ Cette application permet aux utilisateurs de suivre le nombre de sessions réali
 
 - 📋 [Kanban](https://openclassrooms.notion.site/Tableau-de-bord-SportSee-6686aa4b5f44417881a4884c9af5669e)
 
+## Usage
+
+1. Cloner le repo `https://github.com/Daiba-yume/Project_12_SS.git`
+2. Installer les dépendances : `npm install`
+3. Lancer le projet : `npm run dev`
+
 ### Installation
 
 #### Configuration du fichier `.env`
