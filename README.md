@@ -57,3 +57,19 @@ cd Frontend
 npm install
 npm run dev
 ```
+
+---
+
+## Auteur
+
+Daïba Yume :purple_heart:
+
+## 📄 Licence
+
+📝 Projet pédagogique — OpenClassrooms
+
+---
+
+## 💮 Demo
+
+https://project-14-wh.vercel.app/
